@@ -47,6 +47,8 @@ _NEURON_SUPPORTED_MODELS: Dict[str, Tuple[str, str]] = {
                          "NeuronMixtralForCausalLM"),
     "MllamaForConditionalGeneration": ("neuronx_distributed_inference.models.mllama.modeling_mllama",
                          "NeuronMllamaForCausalLM"),
+   "MistralForCausalLM": ("neuronx_distributed_inference.models.llama.modeling_llama",
+                         "NeuronLlamaForCausalLM"),
 }
 
 
