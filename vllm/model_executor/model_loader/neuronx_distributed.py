@@ -36,7 +36,6 @@ TORCH_DTYPE_TO_NEURON_AMP = {
     torch.float32: "float32",
 }
 
-
 # Models supported by Neuronx distributed for inference.
 _NEURON_SUPPORTED_MODELS: Dict[str, Tuple[str, str]] = {
     "LlamaForCausalLM": ("neuronx_distributed_inference.models.llama.modeling_llama",
@@ -47,12 +46,40 @@ _NEURON_SUPPORTED_MODELS: Dict[str, Tuple[str, str]] = {
                          "NeuronMixtralForCausalLM"),
     "MllamaForConditionalGeneration": ("neuronx_distributed_inference.models.mllama.modeling_mllama",
                          "NeuronMllamaForCausalLM"),
-   "MistralForCausalLM": ("neuronx_distributed_inference.models.llama.modeling_llama",
+    "MistralForCausalLM": ("neuronx_distributed_inference.models.llama.modeling_llama",
                          "NeuronLlamaForCausalLM"),
     "PixtralForConditionalGeneration": ("neuronx_distributed_inference.models.pixtral.modeling_pixtral",
                          "NeuronPixtralForConditionalGeneration"),
 }
 
+class NeuronPixtralConditionalGeneration(nn.Module):
+    def __init__(
+        self,
+        config: PretrainedConfig,
+        on_device_sampling_disabled: bool = False) -> None:
+        super().__init__()
+        self.config = config
+        self.logits_processor = LogitsProcessor(config.get_text_config().vocab_size,
+                                                logits_as_input=True)
+
+        self.on_device_sampling_disabled = on_device_sampling_disabled
+        if self.on_device_sampling_disabled:
+            # Use default sampler
+            self.sampler = Sampler()
+
+        # Lazy initialized
+        self.model: nn.Module
+
+    def forward():
+        print ('Not implemented')
+
+    def sample():
+        print ('Not implemented')
+
+    def load_weights():
+        print ('Not implemented')
+
+    
 
 class NeuronCasualLM(nn.Module):
 
