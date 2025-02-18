@@ -685,6 +685,9 @@ def get_neuron_model(model_config: ModelConfig,
     model_arch = _get_model_architecture(model_config.hf_config)
     if model_arch == "MllamaForConditionalGeneration":
         model = NeuronMllamaForCausalLM(model_config.hf_config)
+
+    elif model_arch == "PixtralForConditionalGeneration"
+        model = NeuronPixtralForConditionalGeneration(model_config.hf_config)
     else:
         model = NeuronCasualLM(model_config.hf_config)
     default_neuron_config_args = _get_default_neuron_config(
